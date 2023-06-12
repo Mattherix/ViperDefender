@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 
-class TextListApp(tk.Tk):
+class FileListApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Text List App")
@@ -33,10 +33,8 @@ class TextListApp(tk.Tk):
 
         self.update_treeview()
 
-    def add_item(self):
-        text = "New File"
+    def add_item(self, text=None, additional_info=None):
         if text:
-            additional_info = "Checking..."
             self.text_list.append((text, additional_info))
             self.update_treeview()
 
@@ -69,5 +67,5 @@ class TextListApp(tk.Tk):
         self.display_info()
 
 if __name__ == "__main__":
-    app = TextListApp()
+    app = FileListApp()
     app.mainloop()
