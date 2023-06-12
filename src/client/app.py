@@ -25,10 +25,13 @@ class App:
 
     def launch_action(self):
         self.app = FileListApp()
-        daemon = Thread(target=self.app.mainloop)
-        daemon.setDaemon(True)
-        daemon.start()
-        self.checkFiles()
+        # daemon = Thread(target=self.app.mainloop)
+        # daemon.setDaemon(True)
+        # daemon.start()
+        check_files = Thread(target=self.checkFiles)
+        check_files.setDaemon(True)
+        check_files.start()
+        self.app.mainloop()
 
     def launch_folder_finder(self):
         self.window = tk.Tk()

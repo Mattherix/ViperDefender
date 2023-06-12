@@ -41,7 +41,7 @@ class FileListApp(tk.Tk):
             self.update_treeview()
 
     def delete_item(self):
-        if self.selected_item:
+        if self.selected_item != None:
             confirmation = messagebox.askyesno("Delete Item", "Are you sure you want to delete this item?")
             if confirmation:
                 del self.text_list[self.selected_item]
