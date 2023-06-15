@@ -3,6 +3,7 @@ import os
 import sys
 import time
 import tkinter as tk
+from tkinter import ttk
 from tkinter import filedialog
 from threading import Thread
 from src.client.fileListApp import FileListApp
@@ -35,13 +36,23 @@ class App:
 
     def launch_folder_finder(self):
         self.window = tk.Tk()
-        self.window.title("Choose a folder")
+        self.window.title("Viper Defender")
+        # add the png logo
+        self.logo = tk.PhotoImage(file="./assets/logo.png")
+        self.window.iconphoto(False, self.logo)
+        style = ttk.Style(self.window)
+        style.theme_use("clam")
         self.window.geometry("400x200")
         self.window.resizable(False, False)
-        self.window.config(bg="#2C2F33")
         # add an folder input
         # add a button to choose the folder
-        self.folder_button = tk.Button(self.window, text="Choose folder", command=self.choose_folder)
+        self.folder_label = ttk.Label(self.window, text="Choose a folder to watch")
+        # increase the size of the label
+        self.folder_label.config(font=("Helvetica", 16))
+        # remove the background of the label
+        self.folder_label.config(background=self.window.cget("background"))
+        self.folder_label.pack(pady=10)
+        self.folder_button = ttk.Button(self.window, text="Choose folder", command=self.choose_folder)
         self.folder_button.pack(pady=10)
         self.window.mainloop()
     def choose_folder(self):
@@ -57,12 +68,10 @@ class App:
         while True:
             new_files = os.listdir(self.path)
             self.app.update()
-            print("Checking files")
             if new_files != self.files:
                 # list the new files founded
                 files_founded = list(set(new_files) - set(self.files))
                 self.files = new_files
-                print("New files found!")
                 for i in files_founded:
                     total_files += 1
                     # add the name of the file to the window
@@ -74,5 +83,4 @@ class App:
                     )
                     self.app.add_item(i, "Checking")
                     # add some styles to the label
-                    print("Checking file: " + i)
-            time.sleep(3)
+            time.sleep(0.5)

@@ -1,31 +1,46 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
+from ttkthemes import ThemedTk
+
 
 class FileListApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("Text List App")
+        self.title("Viper Defender")
+        # change the size of the window
+        self.geometry("600x400")
+        self.logo = tk.PhotoImage(file="./assets/logo.png")
+        self.iconphoto(False, self.logo)
+
+
+        style = ttk.Style(self)
+        style.theme_use("clam")
+
 
         self.text_list = []
         self.selected_item = None
 
-        self.title_label = tk.Label(self, text="Text List", font=("Helvetica", 16))
+        self.title_label = ttk.Label(self, text="Files checking", font=("Helvetica", 16))
+        self.title_label.config(background=self.cget("background"))
         self.title_label.pack(pady=10)
 
-        self.treeview = ttk.Treeview(self)
+        self.scrollbar = ttk.Scrollbar(self)
+        # put the scrollbar on the right of the treeview
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        self.treeview = ttk.Treeview(self, yscrollcommand=self.scrollbar.set)
         self.treeview.pack(pady=5)
         self.treeview["columns"] = ("Additional Info")
-        self.treeview.column("#0", width=150, anchor="w")
-        self.treeview.column("#1", width=150, anchor="w")
+        self.treeview.column("#0", width=int(400), anchor="w")
+        self.treeview.column("#1", width=int(200), anchor="w")
         self.treeview.heading("#0", text="Text")
-        self.treeview.heading("#1", text="Additional Info")
+        self.treeview.heading("#1", text="Checking Status")
         self.treeview.bind("<<TreeviewSelect>>", self.on_select)
 
-        self.info_label = tk.Label(self, text="", font=("Helvetica", 12))
-        self.info_label.pack(pady=10)
+        self.scrollbar.config(command=self.treeview.yview)
 
-        self.delete_button = tk.Button(self, text="Delete Item", command=self.delete_item)
+        self.delete_button = ttk.Button(self, text="Delete Item", command=self.delete_item)
         self.delete_button.pack(pady=5)
 
         self.update_treeview()
@@ -39,6 +54,7 @@ class FileListApp(tk.Tk):
             # add the item with a default id and additional info
             self.text_list.append(("New Item", "Additional Info"))
             self.update_treeview()
+
 
     def delete_item(self):
         if self.selected_item != None:
