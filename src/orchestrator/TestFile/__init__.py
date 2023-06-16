@@ -3,8 +3,12 @@ import json
 import requests
 import azure.functions as func
 from dotenv import load_dotenv
-load_dotenv()
 import os
+
+try:
+    load_dotenv()
+except Exception as e:
+    pass
 
 
 
