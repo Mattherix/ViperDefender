@@ -41,7 +41,7 @@ jobs:
         with:
           name: python-app
           path: |
-            src/orchestrator/
+            .
             !venv/
 
   deploy:
