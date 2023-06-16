@@ -32,7 +32,7 @@ jobs:
           source venv/bin/activate
 
       - name: Install dependencies
-        run: pip install -r src/orchestrator/requirements.txt
+        run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here
 
@@ -65,6 +65,6 @@ jobs:
           app-name: 'viperdefense'
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_43ABCAD8F4A74A5FB2B0B33AD026DD9F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_00BF3E2903EE4C43A128468E6DE302B7 }}
           scm-do-build-during-deployment: true
           enable-oryx-build: true
