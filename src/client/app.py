@@ -17,7 +17,7 @@ class App:
         self.userJwt = None
         self.files = os.listdir(self.path)
         # add a button to launch the app
-        self.base_url = "http://localhost:7071/api"
+        self.base_url = "https://viperdefense.azurewebsites.net/api/"
         self.app = None
         # Etape de choix du dossier
         self.launch_folder_finder()
