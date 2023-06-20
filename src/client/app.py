@@ -95,21 +95,17 @@ class App:
         url = f"{self.base_url}/TestFile"
         # create a readable stream
         with open(f"{self.path}/{name}", "rb") as file:
-            readed_file = file.read()
             files = {
-                "file": (name,readed_file)
+                "file": open(f"{self.path}/{name}", "rb")
             }
-            headers = {"Content-Type": "multipart/form-data;",
-              "Content-Disposition": "attachment; filename=filename"
-           }
-            response = requests.post(url,headers=headers, files=files)
+            response = requests.post(url, files=files)
             print(response)
         if response.status_code == 200:
             response_json = response.json()
             print(response_json)
             if response_json["status"] == "clean":
-                self.app.update_item(index, name, "Clean ✅")
+                self.app.update_item(index, name, "Clean")
             elif response_json["status"] == "malicious":
-                self.app.update_item(index, name, "Mailicious ❌")
+                self.app.update_item(index, name, "Malicious")
         else:
-            self.app.update_item(index, name,"Error ❌")
+            self.app.update_item(index, name,"Error")
