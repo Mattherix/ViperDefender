@@ -15,7 +15,8 @@ except Exception as e:
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     # get file from request
-    file = req.files['file']
+    # file = req.files['file']
+    file = req.files.get('file')
     # if file is not found, return error
     if not file:
         return func.HttpResponse(

@@ -79,6 +79,10 @@ class FileListApp(tk.Tk):
 
         self.selected_item = None
 
+    def update_item(self, index, text, additional_info):
+        self.text_list[index] = (text, additional_info)
+        self.update_treeview()
+
 if __name__ == "__main__":
     app = FileListApp()
     app.mainloop()
