@@ -2,14 +2,7 @@ import logging
 import json
 import requests
 import azure.functions as func
-from dotenv import load_dotenv
 import os
-
-try:
-    load_dotenv()
-except Exception as e:
-    pass
-
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
