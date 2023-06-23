@@ -4,5 +4,4 @@
 
 azure-functions
 requests
-python-dotenv
 
