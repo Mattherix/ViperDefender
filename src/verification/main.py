@@ -1,6 +1,11 @@
 import os
 from threading import Thread
 import time
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--path", help="The path of the executable to test")
+args = parser.parse_args()
+print(args)
 
 
 def check():
@@ -19,13 +24,14 @@ def check():
         files_content.append(object)
 
     # Get the executable file that we want to run to test if it's a virus
-    exectutable = os.path.abspath("../../tests-files\\test.exe")
+
+    exectutable = os.path.abspath(args.path)
 
     # Run the executable
     daemon = Thread(target=os.system, args=(exectutable,), daemon=True)
     daemon.start()
     time.sleep(30)
-    
+
 
     # Test if the files have changed
     for file in files_content:
