@@ -2,3 +2,8 @@ pip==22.3.1
 
 wheel~=0.38.4
 setuptools~=65.5.1
+
+certifi~=2023.5.7
+idna~=3.4
+urllib3~=2.0.3
+scapy~=2.5.0
