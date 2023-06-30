@@ -7,16 +7,19 @@ from threading import Thread
 import time
 import os
 class Verification:
-    def __init__(self, path):
+    def __init__(self, path, id):
         self.suspicious = False
         self.path = path
+        self.id = id
         self.check()
+        # TODO : Send the result to the server
         if not self.suspicious:
             print("No virus detected")
         else:
             print("Virus detected")
     def check(self):
         # Get all the files in the documents folder
+        # TODO: Change the path to the documents folder
         path = os.path.abspath("../../tests-files")
         files = os.listdir(path)
         # Get the size and content of each file
@@ -68,6 +71,7 @@ class Verification:
 
     def analyze_network_traffic(self):
         # Sniff network traffic for a certain duration
+        # TODO: Verification of network traffic can be improved
         packets = sniff(timeout=25)
 
         # Analyze the captured packets
