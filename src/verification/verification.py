@@ -1,6 +1,8 @@
 
 from scapy.all import sniff
-from scapy.layers.inet import IP, TCP
+from scapy.layers.inet import IP, TCP, ICMP, UDP
+from scapy.layers.dns import DNS
+from scapy.layers.http import HTTP
 from threading import Thread
 import time
 import os
@@ -64,7 +66,6 @@ class Verification:
                     return
         return
 
-
     def analyze_network_traffic(self):
         # Sniff network traffic for a certain duration
         packets = sniff(timeout=25)
@@ -72,11 +73,11 @@ class Verification:
         # Analyze the captured packets
         for packet in packets:
             if TCP in packet:
-                # Perform your analysis based on TCP packets
-                # You can access packet fields and perform various checks here
+                # Perform analysis based on TCP packets
                 # Example: Check if the packet is a SYN flood attack
                 if packet[TCP].flags == 'S':
                     print("SYN flood attack detected!")
+                    self.suspicious = True
 
             if IP in packet:
                 source_ip = packet[IP].src
@@ -90,7 +91,6 @@ class Verification:
                     self.suspicious = True
 
                 # Perform additional verifications or analysis as needed
-                # Example: Check for specific protocols or ports being used
                 if packet.haslayer(TCP):
                     source_port = packet[TCP].sport
                     destination_port = packet[TCP].dport
@@ -101,3 +101,47 @@ class Verification:
                         print(
                             f"Malicious port traffic detected: {source_ip}:{source_port} -> {destination_ip}:{destination_port}")
                         self.suspicious = True
+
+                if packet.haslayer(ICMP):
+                    # Perform analysis based on ICMP packets
+                    # Example: Check if it's an ICMP echo request (ping) flood
+                    if packet[ICMP].type == 8:
+                        print("ICMP echo request flood detected!")
+                        self.suspicious = True
+
+                if packet.haslayer(UDP):
+                    # Perform analysis based on UDP packets
+                    # Example: Check if it's a UDP flood attack
+                    print("UDP flood attack detected!")
+                    self.suspicious = True
+
+                if packet.haslayer(DNS):
+                    # Perform analysis based on DNS packets
+                    # Example: Check for suspicious DNS queries
+                    dns_query = packet[DNS].qd.qname.decode()
+                    suspicious_domains = ["evil.com", "malicious.net"]
+                    if any(domain in dns_query for domain in suspicious_domains):
+                        print(f"Suspicious DNS query detected: {dns_query}")
+                        self.suspicious = True
+
+                if packet.haslayer(HTTP):
+                    # Perform analysis based on HTTP packets
+                    # Example: Check for suspicious HTTP requests
+                    http_method = packet[HTTP].Method.decode()
+                    suspicious_methods = ["POST", "PUT"]
+                    if http_method in suspicious_methods:
+                        print(f"Suspicious HTTP request detected: {http_method} {destination_ip}")
+                        self.suspicious = True
+
+                # Additional verifications and analysis can be added here
+                # Example: Check for specific packet payloads, protocols, or patterns
+
+                # Example: Check for excessive packet sizes indicating potential DDoS attacks
+                if len(packet) > 1500:
+                    print("Large packet size detected, potential DDoS attack!")
+                    self.suspicious = True
+
+                # Example: Check for packets with empty payloads indicating potential scanning or reconnaissance
+                if not packet.payload:
+                    print("Empty payload detected, potential scanning or reconnaissance activity!")
+                    self.suspicious = True
