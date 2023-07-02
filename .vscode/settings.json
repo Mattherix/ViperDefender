@@ -4,5 +4,10 @@
     "azureFunctions.pythonVenv": ".venv",
     "azureFunctions.projectLanguage": "Python",
     "azureFunctions.projectRuntime": "~4",
-    "azureFunctions.projectSubpath": "src/orchestrator"
+    "azureFunctions.projectSubpath": "src/orchestrator",
+    "conventionalCommits.scopes": [
+        "serverless-api",
+        "ci",
+        "verification_script"
+    ]
 }
