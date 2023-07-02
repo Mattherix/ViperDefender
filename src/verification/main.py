@@ -1,7 +1,6 @@
 import os
 import argparse
 from verification import Verification
-from dotenv import load_dotenv
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--path", help="The path of the executable to test")
