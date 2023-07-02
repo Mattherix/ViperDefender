@@ -18,4 +18,5 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: verification
-        path: dist/windows
+        path: src/verification/dist/windows
+        if-no-files-found: error
