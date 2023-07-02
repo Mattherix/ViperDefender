@@ -1,5 +1,8 @@
 import os
 import argparse
+
+from sys import exit
+
 from verification import Verification
 
 parser = argparse.ArgumentParser()
