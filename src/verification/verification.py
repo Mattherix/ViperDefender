@@ -4,19 +4,24 @@ from scapy.layers.inet import IP, TCP, ICMP, UDP
 from scapy.layers.dns import DNS
 from scapy.layers.http import HTTP
 from threading import Thread
+
+from events import Event
+
 import time
 import os
+
 class Verification:
-    def __init__(self, path, id):
+    def __init__(self, path, id, topic_key, topic_endpoint):
         self.suspicious = False
         self.path = path
         self.id = id
+
         self.check()
-        # TODO : Send the result to the server
-        if not self.suspicious:
-            print("No virus detected")
-        else:
-            print("Virus detected")
+
+        # Send the result to the server
+        self.event = Event(topic_key, topic_endpoint)
+        self.event.results(self.id, self.suspicious)
+        
     def check(self):
         # Get all the files in the documents folder
         # TODO: Change the path to the documents folder
