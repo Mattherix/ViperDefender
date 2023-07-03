@@ -1,5 +1,5 @@
 # ViperDefender
-ViperDefender is a python based client that can be used to detect and remove malware from a system. It uses the [VirusTotal]() API to scan files and a cloud sanbox that test every files downloaded on the Computer. It also has a public API that can be used to scan files.
+ViperDefender is a python based client that can be used to detect and remove malware from a system. It uses the [VirusTotal]() API to scan files and a cloud sandbox that test every file downloaded on the Computer. It also has a public API that can be used to scan files.
 
 ## Table of Contents
 - [ViperDefender](#viperdefender)
@@ -21,7 +21,7 @@ A computer using Windows 10&trade; or Windows 11&trade;
 [pyp](https://pypi.org/project/pyp/)
 
 ## Installation
-To install the project, downoad the src/client folder and run the following command:
+To install the project, download the src/client folder and run the following command:
 ```bash
 pip install -r requirements.txt
 ```
