@@ -42,8 +42,8 @@ class Verification:
         #[print(str((f['size'], f['name'], f['path'])) + '\n') for f in files_content]
 
         # Create a thread to analyze the network traffic
-        analyze_thread = Thread(target=self.analyze_network_traffic, daemon=True)
-        analyze_thread.start()
+        #analyze_thread = Thread(target=self.analyze_network_traffic, daemon=True)
+        #analyze_thread.start()
 
         # Get the executable file that we want to run to test if it's a virus
         exectutable = os.path.abspath(self.path)
@@ -53,7 +53,7 @@ class Verification:
         time.sleep(30)
 
         # Stop the network traffic analysis
-        analyze_thread.join()
+        #analyze_thread.join()
 
         # Test if the files have changed
         for file in files_content:
