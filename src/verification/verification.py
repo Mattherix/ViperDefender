@@ -6,6 +6,7 @@ from scapy.layers.http import HTTP
 from threading import Thread
 
 from events import Event
+from download import  EXTRACTED_FILES_PATH
 
 import time
 import os
@@ -21,24 +22,24 @@ class Verification:
         # Send the result to the server
         self.event = event
         self.event.results(self.id, self.suspicious)
-        
+
     def check(self):
         # Get all the files in the documents folder
-        # TODO: Change the path to the documents folder
-        path = os.path.abspath("../../tests-files")
+        path = os.path.abspath(EXTRACTED_FILES_PATH)
         files = os.listdir(path)
+
         # Get the size and content of each file
         files_content = []
         for file in files:
             object = {
-                "size": os.stat(path + "\\" + file).st_size,
-                "content": open(path + "\\" + file, "rb").read(),
+                "size": os.stat(path + "/" + file).st_size,
+                "content": open(path + "/" + file, "rb").read(),
                 "name": file,
-                "path": os.path.abspath(path + "\\" + file)
+                "path": os.path.abspath(path + "/" + file)
             }
             files_content.append(object)
 
-
+        #[print(str((f['size'], f['name'], f['path'])) + '\n') for f in files_content]
 
         # Create a thread to analyze the network traffic
         analyze_thread = Thread(target=self.analyze_network_traffic, daemon=True)

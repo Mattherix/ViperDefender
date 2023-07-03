@@ -3,6 +3,7 @@ import argparse
 
 from sys import exit
 
+from download import download_and_unzip_files
 from verification import Verification
 from events import Event
 
@@ -29,5 +30,6 @@ except:
 
 # TODO : Check if the id is valid
 
+download_and_unzip_files()
 verification = Verification(args.path, args.id, event)
 
