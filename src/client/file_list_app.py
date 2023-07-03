@@ -4,7 +4,7 @@ from tkinter import ttk
 from ttkthemes import ThemedTk
 
 
-class FileListApp(tk.Tk):
+class file_list_app(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Viper Defender")
@@ -84,5 +84,5 @@ class FileListApp(tk.Tk):
         self.update_treeview()
 
 if __name__ == "__main__":
-    app = FileListApp()
+    app = file_list_app()
     app.mainloop()

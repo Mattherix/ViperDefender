@@ -7,7 +7,7 @@ from tkinter import ttk
 from tkinter import filedialog
 from threading import Thread
 import requests
-from src.client.fileListApp import FileListApp
+from src.client.file_list_app import file_list_app
 import hashlib
 
 def get_file_hash(file_path, algorithm="sha256"):
@@ -37,7 +37,7 @@ class App:
 
 
     def launch_action(self):
-        self.app = FileListApp()
+        self.app = file_list_app()
         # daemon = Thread(target=self.app.mainloop)
         # daemon.setDaemon(True)
         # daemon.start()
