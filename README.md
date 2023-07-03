@@ -18,7 +18,7 @@ ViperDefender is a python based client that can be used to detect and remove mal
 ## Requirements
 A computer using Windows 10&trade; or Windows 11&trade; 
 [python 3 or higher](https://www.python.org/downloads/)
-[pyp](https://pypi.org/project/pyp/)
+[pip](https://pypi.org/project/pip/)
 
 ## Installation
 To install the project, download the src/client folder and run the following command:
