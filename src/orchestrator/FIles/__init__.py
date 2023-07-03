@@ -3,9 +3,6 @@ from pymongo import MongoClient
 import azure.functions as func
 import json
 
-# load environment variables
-from dotenv import load_dotenv
-load_dotenv()
 from bson import ObjectId
 
 class JSONEncoder(json.JSONEncoder):
