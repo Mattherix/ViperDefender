@@ -1,0 +1,4 @@
+azure-eventgrid~=4.13.0
+azure-identity~=1.13.0
+
+scapy~=2.5.0
