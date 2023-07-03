@@ -8,6 +8,16 @@ from tkinter import filedialog
 from threading import Thread
 import requests
 from src.client.fileListApp import FileListApp
+import hashlib
+
+def get_file_hash(file_path, algorithm="sha256"):
+    hash_obj = hashlib.new(algorithm)
+    with open(file_path, "rb") as file:
+        buf = file.read(65536)  # Read file in chunks for large files
+        while len(buf) > 0:
+            hash_obj.update(buf)
+            buf = file.read(65536)
+    return hash_obj.hexdigest()
 
 
 class App:
@@ -17,6 +27,7 @@ class App:
         self.userJwt = None
         self.files = os.listdir(self.path)
         # add a button to launch the app
+        # self.base_url = "http://localhost:7071/api/"
         self.base_url = "https://viperdefense.azurewebsites.net/api/"
         self.app = None
         # Etape de choix du dossier
@@ -92,14 +103,37 @@ class App:
             time.sleep(0.5)
 
     def sendFile(self,name, index):
-        url = f"{self.base_url}/TestFile"
+        url = f"{self.base_url}TestFile"
+        id = None
         # create a readable stream
+
         with open(f"{self.path}/{name}", "rb") as file:
             files = {
                 "file": open(f"{self.path}/{name}", "rb")
             }
+            # Get the hash of the file
+            # post session
+            hash = get_file_hash(f"{self.path}/{name}")
+            print("hash",hash)
+            already_scan_test_response = requests.get(f"{self.base_url}Files?hash={hash}")
+            print("already_scan_test_response",already_scan_test_response)
+            if already_scan_test_response.status_code == 200:
+                already_scan_test_response_json = already_scan_test_response.json()
+                if already_scan_test_response_json["session_result"] == "clean":
+                    self.app.update_item(index, name, "Clean")
+                elif already_scan_test_response_json["session_result"] == "malicious":
+                    self.app.update_item(index, name, "Malicious")
+                return
+
+            # Create session url
+            create_session_url = f"{self.base_url}Session"
+            create_session_response = requests.post(create_session_url)
+            if create_session_response.status_code == 201:
+                create_session_response_json = create_session_response.json()
+                id = create_session_response_json["_id"]
+
             response = requests.post(url, files=files)
-            print(response)
+            print("VirusTOtalresp",response)
         if response.status_code == 200:
             response_json = response.json()
             print(response_json)
@@ -107,5 +141,9 @@ class App:
                 self.app.update_item(index, name, "Clean")
             elif response_json["status"] == "malicious":
                 self.app.update_item(index, name, "Malicious")
+            hash = get_file_hash(f"{self.path}/{name}")
+            aza = requests.post(f"{self.base_url}Files?hash={hash}&result={response_json['status']}")
+            print("aza",aza)
+            requests.patch(f"{self.base_url}Session/{id}", json={"session_ended": True, "session_result": response_json['status']})
         else:
             self.app.update_item(index, name,"Error")
