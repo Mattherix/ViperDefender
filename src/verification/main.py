@@ -4,6 +4,7 @@ import argparse
 from sys import exit
 
 from verification import Verification
+from events import Event
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--path", help="The path of the executable to test")
@@ -20,17 +21,13 @@ if not os.path.exists(args.path):
     print("The path of the executable to test is not valid")
     exit()
 
-if args.topic_endpoint == None:
-    # TODO: Check endpoint
-    print("The topic endpoint is not valid")
-    exit()
-
-if args.topic_key == None:
-    # TODO: Check topic key
-    print("The topic endpoint key is not valid")
+try:
+    event = Event(args.topic_key, args.topic_endpoint)
+except:
+    print("The topic endpoint or endpoint key is not valid")
     exit()
 
 # TODO : Check if the id is valid
 
-verification = Verification(args.path, args.id, args.topic_key, args.topic_endpoint)
+verification = Verification(args.path, args.id, event)
 

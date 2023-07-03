@@ -11,7 +11,7 @@ import time
 import os
 
 class Verification:
-    def __init__(self, path, id, topic_key, topic_endpoint):
+    def __init__(self, path, id, event: Event):
         self.suspicious = False
         self.path = path
         self.id = id
@@ -19,7 +19,7 @@ class Verification:
         self.check()
 
         # Send the result to the server
-        self.event = Event(topic_key, topic_endpoint)
+        self.event = event
         self.event.results(self.id, self.suspicious)
         
     def check(self):
