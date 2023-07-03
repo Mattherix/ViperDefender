@@ -38,4 +38,5 @@ python3 main.py
 
 ## API
 We also have a public API that can be used.
+The client is depending on the API.
 Here is the api [url](https://viperdefense.azurewebsites.net/api/) and an [example endpoint](https://viperdefense.azurewebsites.net/api/HttpTrigger2?name=test)
