@@ -11,12 +11,9 @@ ViperDefender is a python based client that can be used to detect and remove mal
   - [API](#api)
 
 ## Authors
-- [Matthieu Roquejoffre](https://github.com/Mattherix)
-- [Pierre-Marie Herrburger--Pietri](https://github.com/Unaxe)
-- [Mathieu Lebrun](https://github.com/OursCarrock)
-- [Evan Zanzuchi](https://github.com/NeverlandOZ)
-- [Victor Boulet](https://github.com/Viki922)
-- [Theodore Massima](https://github.com/watchiMass)
+<a href="https://github.com/Mattherix/ViperDefender/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Mattherix/ViperDefender" />
+</a>
 
 ## Requirements
 A computer using windows
