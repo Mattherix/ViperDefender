@@ -4,16 +4,11 @@ ViperDefender is a python based client that can be used to detect and remove mal
 ## Table of Contents
 - [ViperDefender](#viperdefender)
   - [Table of Contents](#table-of-contents)
-  - [Authors](#authors)
   - [Requirements](#requirements)
   - [Installation](#installation)
   - [Usage](#usage)
   - [API](#api)
-
-## Authors
-<a href="https://github.com/Mattherix/ViperDefender/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Mattherix/ViperDefender" />
-</a>
+  - [Contributing](#contributing)
 
 ## Requirements
 A computer using Windows 10&trade; or Windows 11&trade; 
@@ -40,3 +35,8 @@ python3 main.py
 We also have a public API that can be used.
 The client is depending on the API.
 Here is the api [url](https://viperdefense.azurewebsites.net/api/) and an [example endpoint](https://viperdefense.azurewebsites.net/api/HttpTrigger2?name=test)
+
+## Contributing
+<a href="https://github.com/Mattherix/ViperDefender/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Mattherix/ViperDefender" />
+</a>
