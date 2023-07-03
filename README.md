@@ -30,7 +30,7 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-To run the project, run the following command:
+To run the project, execute the following command:
 ```bash
 python main.py
 ```
