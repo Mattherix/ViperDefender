@@ -10,5 +10,3 @@ idna~=3.4
 certifi~=2023.5.7
 urllib3~=2.0.3
 scapy~=2.5.0
-
-tk~=8.6
