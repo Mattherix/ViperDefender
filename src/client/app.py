@@ -1,6 +1,4 @@
 import os
-import os
-import sys
 import time
 import tkinter as tk
 from tkinter import ttk
@@ -11,7 +9,6 @@ from src.client.file_list_app import file_list_app
 import hashlib
 import shutil
 import subprocess
-import win32security
 
 def get_file_hash(file_path, algorithm="sha256"):
     hash_obj = hashlib.new(algorithm)
