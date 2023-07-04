@@ -90,7 +90,7 @@ class App:
                     # get the file to send them to an API
                     # send the file to the API
                     # if file is not a .tmp
-                    if file.endswith(".tmp") or file.endswith(".crdownload"):
+                    if file.endswith(".tmp") or file.endswith(".crdownload") or file.endswith(".part") or file.endswith(".download"):
                         continue
                     check_file_daemon = Thread(target=self.sendFile, args=(file, len(files_printed)))
                     check_file_daemon.setDaemon(True)
@@ -218,5 +218,5 @@ class App:
             print(f"Failed to move file '{file}' after {retry_limit} retries.")
 
     def delete_file(self, file):
-        os.remove(f"{self.quarantine_path}/{file}")
+        pass
 
