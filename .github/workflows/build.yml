@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        app: ["client", "verification"]
+        app: ["verification", "client"]
 
     runs-on: ubuntu-latest
 
