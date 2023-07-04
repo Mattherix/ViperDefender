@@ -5,7 +5,7 @@ from tkinter import ttk
 from tkinter import filedialog
 from threading import Thread
 import requests
-from file_list_app import file_list_app
+from src.client.file_list_app import file_list_app
 import hashlib
 import shutil
 import subprocess

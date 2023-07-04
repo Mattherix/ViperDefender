@@ -16,10 +16,10 @@ jobs:
     - name: Package Application
       uses: JackMcKew/pyinstaller-action-windows@python3-10-pyinstaller-5-3
       with:
-        path: src/${{ matrix.app }}
+        path: src/verification
 
     - uses: actions/upload-artifact@v2
       with:
         name: verification
-        path: src/${{ matrix.app }}/dist/windows
+        path: src/verification/dist/windows
         if-no-files-found: error
