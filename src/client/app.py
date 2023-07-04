@@ -90,7 +90,7 @@ class App:
                     # get the file to send them to an API
                     # send the file to the API
                     # if file is not a .tmp
-                    if file.endswith(".tmp"):
+                    if file.endswith(".tmp") or file.endswith(".crdownload"):
                         continue
                     check_file_daemon = Thread(target=self.sendFile, args=(file, len(files_printed)))
                     check_file_daemon.setDaemon(True)
