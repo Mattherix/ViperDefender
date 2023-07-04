@@ -21,20 +21,36 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # get file content
     filecontent = file.stream.read()
     # fetch the virustotal API to test the file
-    
-    url = "https://www.virustotal.com/api/v3/files"
+    # Check the size of the file
+    if len(filecontent) > 32000000:
+        url = "https://www.virustotal.com/api/v3/files/upload_url"
+        api_key = os.environ["VIRUSTOTAL_API_KEY"]
+        headers = {
+            "accept": "application/json",
+            "x-apikey": api_key
+        }
+        response = requests.get(url, headers=headers)
+        response_json = response.json()
 
-    api_key = os.environ["VIRUSTOTAL_API_KEY"]
-    headers = {
-        "accept": "application/json",
-        "x-apikey": api_key
-    }
+        upload_url = response_json["data"]
+        files = {
+            "file": (filename, filecontent)
+        }
+        response = requests.post(upload_url, files=files)
+    else :
+        url = "https://www.virustotal.com/api/v3/files"
 
-    files = {
-        "file": (filename, filecontent)
-    }
+        api_key = os.environ["VIRUSTOTAL_API_KEY"]
+        headers = {
+            "accept": "application/json",
+            "x-apikey": api_key
+        }
 
-    response = requests.post(url, headers=headers, files=files)
+        files = {
+            "file": (filename, filecontent)
+        }
+
+        response = requests.post(url, headers=headers, files=files)
     response_json = response.json()
 
     # check the analysis status
