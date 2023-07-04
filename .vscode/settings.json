@@ -8,6 +8,7 @@
     "conventionalCommits.scopes": [
         "serverless-api",
         "ci",
-        "verification_script"
+        "verification_script",
+        "client"
     ]
 }
