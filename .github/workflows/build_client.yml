@@ -26,5 +26,5 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: client
-        path: src/client/dist/windows
+        path: src/client/dist/main
         if-no-files-found: error
