@@ -4,6 +4,9 @@ on: [push]
 
 jobs:
   build:
+    strategy:
+      matrix:
+        app: ["client", "verification"]
 
     runs-on: ubuntu-latest
 
@@ -13,10 +16,10 @@ jobs:
     - name: Package Application
       uses: JackMcKew/pyinstaller-action-windows@python3-10-pyinstaller-5-3
       with:
-        path: src/verification
+        path: src/${{ matrix.app }}
 
     - uses: actions/upload-artifact@v2
       with:
         name: verification
-        path: src/verification/dist/windows
+        path: src/${{ matrix.app }}/dist/windows
         if-no-files-found: error
