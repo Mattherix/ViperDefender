@@ -22,6 +22,11 @@ jobs:
       run: |
         cd src/client/
         pyinstaller main.py
+    
+    - name: Move Assets
+      run: |
+        mkdir src/client/dist/main/assets
+        copy src/client/assets/logo.png src/client/dist/main/assets/logo.png
 
     - uses: actions/upload-artifact@v2
       with:
