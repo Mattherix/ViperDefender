@@ -18,10 +18,7 @@ A computer using Windows 10&trade; or Windows 11&trade;
 The api [url](https://viperdefense.azurewebsites.net/api/)
 =======
 ## Installation
-To install the project, download the src/client folder and run the following command:
-```bash
-pip install -r requirements.txt
-```
+You can download and install the latest version of ViperDefende [here](https://github.com/Mattherix/ViperDefender/releases/tag/v1.0.0)
 
 ## Usage
 To run the project, execute the following command:
