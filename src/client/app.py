@@ -177,7 +177,7 @@ class App:
         if existing_permissions & administrators_permission == 0:
 
             # Specify the path to the folder
-            folder_path = r"C:\Users\pmher\quarantine"
+            folder_path = self.quarantine_path
 
             # Define the icacls command to modify the permissions
             command = f"icacls \"{folder_path}\" /inheritance:r /remove *S-1-5-32-545 /T"
