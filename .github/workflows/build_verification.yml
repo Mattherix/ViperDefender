@@ -4,10 +4,6 @@ on: [push]
 
 jobs:
   build:
-    strategy:
-      matrix:
-        app: ["verification", "client"]
-
     runs-on: ubuntu-latest
 
     steps:
